@@ -1,0 +1,18 @@
+@import '_base';
+
+:host {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.mat-toolbar {
+  @include zIndex('header');
+
+  position: sticky;
+  top:0;
+
+  .mat-icon {
+    margin-right: $spaceS;
+  }
+}

@@ -1,0 +1,21 @@
+@import '_base';
+
+.admin-page {
+  display: flex;
+  flex: 1;
+
+  .mat-drawer-container {
+    flex: 1;
+
+    .mat-sidenav {
+      flex: 1;
+      min-width: 20vw;
+      padding: $spaceBase;
+    }
+
+    .mat-sidenav-content {
+      flex: 1;
+      padding: $spaceBase;
+    }
+  }
+}

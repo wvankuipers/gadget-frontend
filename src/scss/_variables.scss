@@ -1,0 +1,26 @@
+/* Fonts */
+$fontSizeBase: 16px;
+
+/* Spacing */
+$spaceBase: 1rem;         /* 16px */
+$spaceS: $spaceBase / 2;  /* 8px  */
+$spaceL: $spaceBase *1.5; /* 24px */
+
+/* Z-index items */
+$z-indexed-items: [
+  'content',
+  'header'
+];
+
+/* Sizes */
+$headerHeight: 64px;
+
+
+/* Color styles */
+@mixin errorColors {
+  $white: #FFF;
+  $red: #f44336;
+
+  background-color: $red;
+  color: $white;
+}

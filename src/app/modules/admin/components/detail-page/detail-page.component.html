@@ -1,0 +1,47 @@
+<form *ngIf="formGroup"
+      [formGroup]="formGroup"
+      (ngSubmit)="save.emit()"
+      autocomplete="off">
+  <mat-card>
+    <mat-card-title>
+      <h2>{{ title }}</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <ng-content></ng-content>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <ng-container [ngSwitch]="inEditMode">
+        <ng-container *ngSwitchCase="true">
+          <button mat-flat-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="isSaveButtonDisabled || !formGroup.valid">
+            <mat-icon>save</mat-icon> Save
+          </button>
+          <button mat-flat-button
+                  type="button"
+                  color="warn"
+                  [disabled]="isDeleteButtonDisabled"
+                  (click)="confirmDelete()">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <button mat-flat-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="isSaveButtonDisabled || !formGroup.valid">
+            <mat-icon>save</mat-icon> Create
+          </button>
+        </ng-container>
+      </ng-container>
+
+      <button mat-stroked-button
+              type="button"
+              [disabled]="isCancelButtonDisabled"
+              (click)="cancel.emit()">
+        <mat-icon>cancel</mat-icon> Cancel
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,19 @@
+.overview-page {
+  .mat-table {
+    width: 100%;
+
+    .mat-row {
+      cursor: pointer;
+
+      .mat-column-select,
+      .mat-column-id,
+      .mat-column-actions {
+        width: 30px;
+      }
+    }
+  }
+
+  .overview-page__no-items {
+    font-style: italic;
+  }
+}

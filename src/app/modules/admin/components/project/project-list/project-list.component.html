@@ -1,0 +1,8 @@
+<app-overview-page title="Projects"
+                   [columns]="columns"
+                   [dataSource$]="projectServiceList$"
+                   [messages]="messages"
+                   (create)="createProject()"
+                   (delete)="deleteProjects($event)"
+                   (edit)="editProject($event)">
+</app-overview-page>
