@@ -1,5 +1,18 @@
 <mat-toolbar color="primary">
-  <a mat-button routerLink="/"><mat-icon mat-list-icon>compare</mat-icon> Gadget</a>
+  <div class="mat-toolbar__left">
+    <a mat-button
+       routerLink="/">
+      <mat-icon mat-list-icon>compare</mat-icon> Gadget
+    </a>
+  </div>
+  <div class="mat-toolbar__right">
+    <a mat-icon-button
+       aria-label="Admin pannel"
+       title="Admin pannel"
+       routerLink="/admin">
+      <mat-icon>settings_application</mat-icon>
+    </a>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

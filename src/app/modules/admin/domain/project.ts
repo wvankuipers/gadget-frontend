@@ -1,9 +1,9 @@
-import { GadgetItem } from './gadget-item';
+import { GadgetItemDTO } from './gadget-item';
 import { SuiteId } from './suite';
 
 export type ProjectId = string;
 
-export interface ProjectDTO extends GadgetItem {
+export interface ProjectDTO extends GadgetItemDTO {
   id?: ProjectId;
   name: string;
   slug: string;
@@ -11,6 +11,13 @@ export interface ProjectDTO extends GadgetItem {
 }
 
 export class Project implements ProjectDTO {
+  public id?: ProjectId;
+  public name = '';
+  public slug = '';
+  public suites: SuiteId[] = [];
+  public created?: Date;
+  public updated?: Date;
+
   static notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
     return value !== null && value !== undefined;
   }
@@ -32,12 +39,15 @@ export class Project implements ProjectDTO {
     return sanitizedValue;
   }
 
-  constructor(
-    public id?: ProjectId,
-    public name = '',
-    public slug = '',
-    public suites: SuiteId[] = [],
-    public created?: Date,
-    public updated?: Date
-  ) {}
+  constructor(project?: ProjectDTO) {
+    if (project) {
+      this.id = project.id;
+      this.name = project.name;
+      this.slug = project.slug;
+      this.suites = project.suites || [];
+
+      this.created = project.created ? new Date(project.created) : undefined;
+      this.updated = project.updated ? new Date(project.updated) : undefined;
+    }
+  }
 }

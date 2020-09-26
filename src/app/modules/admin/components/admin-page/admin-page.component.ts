@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+  selector: 'app-admin-page',
+  templateUrl: './admin-page.component.html',
+  styleUrls: ['./admin-page.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OverviewComponent implements OnInit {
-  @HostBinding('class.overview')
-  detailPage = true;
+export class AdminPageComponent implements OnInit {
+  @HostBinding('class.admin-page')
+  adminPage = true;
 
   constructor() {}
 

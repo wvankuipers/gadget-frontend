@@ -12,14 +12,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OverviewComponent } from './components/overview/overview/overview.component';
 import { AppConfigModule } from './modules/app-config/app-config.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
 
 @NgModule({
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }],
-  declarations: [AppComponent, OverviewComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

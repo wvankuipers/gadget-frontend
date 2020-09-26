@@ -3,7 +3,9 @@
 :host {
   display: flex;
   min-height: 100vh;
+  max-width: 100vw;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .mat-toolbar {
@@ -12,7 +14,17 @@
   position: sticky;
   top:0;
 
-  .mat-icon {
-    margin-right: $spaceS;
+  // .mat-icon {
+  //   margin-right: $spaceS;
+  // }
+
+  .mat-toolbar__left {
+    flex-grow: 1;
+    flex: 1;
+    flex-direction: row
+  }
+
+  .mat-toolbar__right {
+    justify-content: flex-end;
   }
 }

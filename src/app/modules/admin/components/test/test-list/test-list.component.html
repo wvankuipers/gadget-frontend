@@ -1,0 +1,47 @@
+<app-overview-page title="Tests"
+                   [hideControls]="{create: true, edit: true}"
+                   [columns]="columns"
+                   [dataSource$]="testServiceList$"
+                   [messages]="messages"
+                   [columnTemplates]="{run: runTemplate, suite: suiteTemplate, project: projectTemplate}"
+                   (delete)="deleteTests($event)">
+</app-overview-page>
+
+<ng-template #projectTemplate
+             let-project="row">
+  <span *ngIf="!project; else projectColumn"
+        class="overview-page__no-items">None</span>
+  <ng-template #projectColumn>
+    <a [routerLink]="['/admin/project/', project.id]"
+       routerLinkActive="router-link-active"
+       mat-button
+       title="Edit project"
+       color="accent">{{ project.name | capitalizeFirst }}</a>
+  </ng-template>
+</ng-template>
+
+<ng-template #suiteTemplate
+             let-suite="row">
+  <span *ngIf="!suite; else suiteColumn"
+        class="overview-page__no-items">None</span>
+  <ng-template #suiteColumn>
+    <a [routerLink]="['/admin/suite/', suite.id]"
+       routerLinkActive="router-link-active"
+       mat-button
+       title="Edit suite"
+       color="accent">{{ suite.name | capitalizeFirst }}</a>
+  </ng-template>
+</ng-template>
+
+<ng-template #runTemplate
+             let-run="row">
+  <span *ngIf="!run; else runColumn"
+        class="overview-page__no-items">None</span>
+  <ng-template #runColumn>
+    <a [routerLink]="['/admin/run/', run.id]"
+       routerLinkActive="router-link-active"
+       mat-button
+       title="Edit run"
+       color="accent">{{ run.id }}</a>
+  </ng-template>
+</ng-template>

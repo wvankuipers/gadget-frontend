@@ -1,5 +1,5 @@
-export interface GadgetItem {
+export interface GadgetItemDTO {
   id?: string;
-  created?: Date;
-  updated?: Date;
+  created?: number | Date;
+  updated?: number | Date;
 }

@@ -17,6 +17,11 @@ $headerHeight: 64px;
 
 
 /* Color styles */
+$grey: #666;
+$darkGrey: #303030;
+
+$backgroundColor: $darkGrey;
+
 @mixin errorColors {
   $white: #FFF;
   $red: #f44336;

@@ -8,21 +8,28 @@ import {
   Input,
   OnInit,
   Output,
+  TemplateRef,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NotificationType } from '../../../shared/domain/notification';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { GadgetItem } from '../../domain/gadget-item';
+import { GadgetItemDTO } from '../../domain/gadget-item';
 import { OverviewPageMessages } from '../../domain/message';
 import { ModalType } from '../../domain/modal';
 import { Project } from '../../domain/project';
 import { ColumnModel } from '../../domain/table';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+
+export interface DisabledControls {
+  create?: boolean;
+  edit?: boolean;
+  delete?: boolean;
+}
 
 @Component({
   selector: 'app-overview-page',
@@ -38,11 +45,13 @@ export class OverviewPageComponent implements OnInit {
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
 
+  @Input() columnTemplates: { [key: string]: TemplateRef<unknown> } = {};
   @Input() title = '';
   @Input() tableColumns: string[] = [];
   @Input() disableSelect = false;
   @Input() disableActions = false;
-  @Input() dataSource$: Observable<GadgetItem[]> = of();
+  @Input() hideControls: DisabledControls = {};
+  @Input() dataSource$!: Observable<GadgetItemDTO[]>;
   @Input() messages: OverviewPageMessages = {
     deleteConfirmationTitle: {
       single: 'Delete item',
@@ -84,8 +93,8 @@ export class OverviewPageComponent implements OnInit {
   @Output() delete: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() edit: EventEmitter<string> = new EventEmitter<string>();
 
-  public dataSource: MatTableDataSource<GadgetItem> = new MatTableDataSource();
-  public selection = new SelectionModel<GadgetItem>(true, []);
+  public dataSource: MatTableDataSource<GadgetItemDTO> = new MatTableDataSource();
+  public selection = new SelectionModel<GadgetItemDTO>(true, []);
   public isDeleteButtonDisabled = true;
 
   private columnModels: ColumnModel[] = [];
@@ -97,7 +106,7 @@ export class OverviewPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataSource$.subscribe((items: GadgetItem[]) => {
+    this.dataSource$.subscribe((items: GadgetItemDTO[]) => {
       this.dataSource.data = items;
       this.dataSource.sort = this.sort;
 
@@ -121,7 +130,9 @@ export class OverviewPageComponent implements OnInit {
   }
 
   confirmDelete(itemId?: string): void {
-    let selectedItems: string[] = this.selection.selected.map((item: GadgetItem) => item.id).filter(Project.notEmpty);
+    let selectedItems: string[] = this.selection.selected
+      .map((item: GadgetItemDTO) => item.id)
+      .filter(Project.notEmpty);
 
     if (itemId) {
       selectedItems = [itemId];
@@ -175,5 +186,9 @@ export class OverviewPageComponent implements OnInit {
 
   masterToggle(): void {
     this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach((row) => this.selection.select(row));
+  }
+
+  isDate(variable: unknown): boolean {
+    return variable instanceof Date;
   }
 }

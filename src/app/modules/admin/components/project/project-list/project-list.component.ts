@@ -19,7 +19,7 @@ export class ProjectListComponent {
     { key: 'name', canSort: true },
     { key: 'created', canSort: true },
     { key: 'updated', canSort: true },
-    { key: 'slug', canSort: true },
+    { key: 'slug', canSort: true, noCapitalize: true },
     { key: 'suites' },
   ];
 
