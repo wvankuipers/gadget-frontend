@@ -1,0 +1,7 @@
+@import '_base';
+
+.mat-card-actions {
+  .mat-button-base + .mat-button-base {
+    margin-left: $spaceS;
+  }
+}

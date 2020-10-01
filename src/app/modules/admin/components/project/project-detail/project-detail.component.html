@@ -1,0 +1,48 @@
+<app-detail-page *ngIf="(project$ | async) as project"
+                 [title]="inEditMode ? 'Project details' : 'Create a new project'"
+                 [formGroup]="form"
+                 [inEditMode]="inEditMode"
+                 (cancel)="cancel()"
+                 (save)="save()"
+                 (delete)="delete()">
+
+  <mat-form-field appearance="outline"
+                  color="accent">
+    <mat-label>Name</mat-label>
+    <input matInput
+           required
+           formControlName="name"
+           placeholder="The name of the project">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  color="accent">
+    <mat-label>Slug</mat-label>
+    <input matInput
+           required
+           formControlName="slug"
+           placeholder="The slug of the project">
+    <mat-hint>Only lower case letters, numbers and `-` are allowed!</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="inEditMode"
+                  appearance="outline"
+                  color="accent"
+                  class="mat-form-field-readonly">
+    <mat-label>Created at</mat-label>
+    <input matInput
+           readonly
+           formControlName="created">
+  </mat-form-field>
+
+  <mat-form-field *ngIf="inEditMode"
+                  appearance="outline"
+                  color="accent"
+                  class="mat-form-field-readonly">
+    <mat-label>Last updated at</mat-label>
+    <input matInput
+           readonly
+           formControlName="updated">
+  </mat-form-field>
+
+</app-detail-page>

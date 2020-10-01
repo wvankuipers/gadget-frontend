@@ -1,0 +1,32 @@
+<app-overview-page title="Suites"
+                   [columns]="columns"
+                   [dataSource$]="suiteServiceList$"
+                   [messages]="messages"
+                   [columnTemplates]="{runs: runs, project: project}"
+                   (create)="createSuite()"
+                   (delete)="deleteSuites($event)"
+                   (edit)="editSuite($event)">
+
+</app-overview-page>
+
+<ng-template #runs
+             let-runs="row">
+  <span *ngIf="runs.length === 0"
+        class="overview-page__no-items">None</span>
+  <ng-container *ngFor="let run of runs">
+    <a [routerLink]="['/admin/run/', run.id]"
+       routerLinkActive="router-link-active"
+       mat-button
+       title="Edit run"
+       color="accent">{{ run.nr }}</a>
+  </ng-container>
+</ng-template>
+
+<ng-template #project
+             let-project="row">
+  <a [routerLink]="['/admin/project/', project.id]"
+     routerLinkActive="router-link-active"
+     mat-button
+     title="Edit project"
+     color="accent">{{ project.name | capitalizeFirst }}</a>
+</ng-template>

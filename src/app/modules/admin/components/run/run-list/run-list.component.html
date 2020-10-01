@@ -1,0 +1,42 @@
+<app-overview-page title="Runs"
+                   [hideControls]="{create: true}"
+                   [columns]="columns"
+                   [dataSource$]="runServiceList$"
+                   [messages]="messages"
+                   [columnTemplates]="{tests: tests, project: project, suite: suite}"
+                   (delete)="deleteRuns($event)"
+                   (edit)="editRun($event)">
+
+</app-overview-page>
+
+<ng-template #tests
+             let-tests="row">
+  <span *ngIf="tests.length === 0"
+        class="overview-page__no-items">None</span>
+  <ng-container *ngFor="let test of tests">
+    <a [routerLink]="['/admin/test/', test.id]"
+       routerLinkActive="router-link-active"
+       mat-button
+       title="Edit test"
+       color="accent">{{ test.name | capitalizeFirst }}</a>
+  </ng-container>
+</ng-template>
+
+<ng-template #project
+             let-project="row">
+  <a [routerLink]="['/admin/project/', project.id]"
+     routerLinkActive="router-link-active"
+     mat-button
+     title="Edit project"
+     color="accent">{{ project.name | capitalizeFirst }}</a>
+</ng-template>
+
+
+<ng-template #suite
+             let-suite="row">
+  <a [routerLink]="['/admin/suite/', suite.id]"
+     routerLinkActive="router-link-active"
+     mat-button
+     title="Edit suite"
+     color="accent">{{ suite.name | capitalizeFirst }}</a>
+</ng-template>

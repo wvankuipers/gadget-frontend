@@ -1,0 +1,44 @@
+<mat-sidenav-container>
+  <mat-sidenav [opened]="true"
+               [mode]="'side'">
+
+    <mat-nav-list>
+      <mat-list-item routerLink="/admin">
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <a matLine
+           routerLink="/admin">Dashboard</a>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/admin/project">
+        <mat-icon mat-list-icon>assignment</mat-icon>
+        <a matLine
+           routerLink="/admin/project">Projects</a>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/admin/suite">
+        <mat-icon mat-list-icon>bookmarks</mat-icon>
+        <a matLine
+           routerLink="/admin/suite">Suites</a>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/admin/run">
+        <mat-icon mat-list-icon>autorenew</mat-icon>
+        <a matLine
+           routerLink="/admin/run">Runs</a>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/admin/test">
+        <mat-icon mat-list-icon>done_all</mat-icon>
+        <a matLine
+           routerLink="/admin/test">Tests</a>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <div class="admin-page__version-tag">
+      <span>Version: 1.0.0</span>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

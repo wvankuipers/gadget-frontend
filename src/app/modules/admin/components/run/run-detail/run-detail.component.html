@@ -1,0 +1,46 @@
+<app-detail-page *ngIf="(run$ | async) as run"
+                 title="Run details"
+                 [formGroup]="form"
+                 [inEditMode]="true"
+                 (cancel)="cancel()"
+                 (save)="save()"
+                 (delete)="delete()">
+
+  <mat-form-field appearance="outline"
+                  color="accent">
+    <mat-label>Nr</mat-label>
+    <input matInput
+           required
+           formControlName="nr"
+           placeholder="The nr of the run">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Suite</mat-label>
+    <mat-select formControlName="suite">
+      <mat-option *ngFor="let suiteOption of (suites$ | async)"
+                  [value]="suiteOption.id">
+        {{suiteOption.name | capitalizeFirst}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  color="accent"
+                  class="mat-form-field-readonly">
+    <mat-label>Created at</mat-label>
+    <input matInput
+           readonly
+           formControlName="created">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  color="accent"
+                  class="mat-form-field-readonly">
+    <mat-label>Last updated at</mat-label>
+    <input matInput
+           readonly
+           formControlName="updated">
+  </mat-form-field>
+
+</app-detail-page>

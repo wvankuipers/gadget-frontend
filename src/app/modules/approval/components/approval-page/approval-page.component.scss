@@ -1,0 +1,10 @@
+@import '_base';
+
+.approval-page {
+  flex: 1 1 auto;
+  background-color: $backgroundColor;
+
+  .mat-sidenav-container {
+    padding: $spaceBase;
+  }
+}

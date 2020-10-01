@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  {{ data.message }}
+</div>
+<div mat-dialog-actions align="end">
+  <ng-container [ngSwitch]="data.modalType">
+    <ng-container *ngSwitchCase="ModalType.Delete">
+      <button mat-flat-button color="warn" [mat-dialog-close]="true"><mat-icon>delete</mat-icon> Delete</button>
+      <button mat-stroked-button (click)="cancel()"><mat-icon>cancel</mat-icon> Cancel</button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <button mat-stroked-button (click)="cancel()"><mat-icon>check</mat-icon> Ok</button>
+    </ng-container>
+  </ng-container>
+</div>

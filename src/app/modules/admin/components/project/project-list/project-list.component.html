@@ -1,0 +1,23 @@
+<app-overview-page title="Projects"
+                   [columns]="columns"
+                   [dataSource$]="projectServiceList$"
+                   [messages]="messages"
+                   [columnTemplates]="{suites: suites}"
+                   (create)="createProject()"
+                   (delete)="deleteProjects($event)"
+                   (edit)="editProject($event)">
+
+</app-overview-page>
+
+<ng-template #suites
+             let-suites="row">
+  <span *ngIf="suites.length === 0"
+        class="overview-page__no-items">None</span>
+  <ng-container *ngFor="let suite of suites">
+    <a [routerLink]="['/admin/suite/', suite.id]"
+       routerLinkActive="router-link-active"
+       mat-button
+       title="Edit suite"
+       color="accent">{{ suite.name | capitalizeFirst }}</a>
+  </ng-container>
+</ng-template>

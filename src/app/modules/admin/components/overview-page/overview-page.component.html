@@ -1,0 +1,115 @@
+<mat-card>
+  <mat-card-title>
+    {{ title }}
+    <button mat-button
+            *ngIf="!hideControls.create"
+            color="accent"
+            (click)="createItem()">
+      <mat-icon>add</mat-icon> Create
+    </button>
+  </mat-card-title>
+  <mat-card-content>
+    <table mat-table
+           matSort
+           [dataSource]="dataSource">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell
+            *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell
+            *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="column.key"
+                    *ngFor="let column of columns">
+        <ng-container *ngIf="column.canSort; else noSort">
+          <th mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header="{{ column.key }}">
+            {{ column.key | capitalizeFirst }}
+          </th>
+        </ng-container>
+        <ng-template #noSort>
+          <th mat-header-cell
+              *matHeaderCellDef>{{ column.key | capitalizeFirst }}</th>
+        </ng-template>
+        <td mat-cell
+            *matCellDef="let element">
+          <ng-container
+                        *ngTemplateOutlet="(columnTemplates[column.key] ? columnTemplates[column.key] : defaultColumnTemplate) context {row: element[column.key]}">
+          </ng-container>
+          <ng-template #defaultColumnTemplate>
+            <ng-container *ngIf="!isDate(element[column.key]); else formatAsDate">
+              <ng-container *ngIf="!column.noCapitalize; else displayRaw">
+                {{ element[column.key] | capitalizeFirst }}
+              </ng-container>
+              <ng-template #displayRaw>
+                {{ element[column.key] }}
+              </ng-template>
+            </ng-container>
+            <ng-template #formatAsDate>
+              {{ element[column.key] | date: 'dd-MM-yy HH:mm' }}
+            </ng-template>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell
+            *matHeaderCellDef></th>
+        <td mat-cell
+            *matCellDef="let item">
+          <button mat-icon-button
+                  (click)="$event.stopPropagation()"
+                  [matMenuTriggerFor]="menu"
+                  aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item
+                    *ngIf="!hideControls.edit"
+                    (click)="$event.stopPropagation(); editItem(item.id)">
+              <mat-icon>edit</mat-icon> Edit
+            </button>
+
+            <button mat-menu-item
+                    *ngIf="!hideControls.delete"
+                    (click)="$event.stopPropagation(); confirmDelete(item.id)">
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row
+          *matHeaderRowDef="tableColumns"></tr>
+      <tr mat-row
+          *matRowDef="let row; columns: tableColumns;"
+          (click)="editItem(row.id)"
+          [title]="!hideControls.edit ? 'Edit this ' + messages.itemLabel : ''"></tr>
+    </table>
+
+    <div *ngIf="dataSource.data.length === 0"
+         class="overview-page__no-items">
+      No {{ messages.itemLabel }} to display
+    </div>
+  </mat-card-content>
+  <mat-card-actions [align]="'end'">
+    <button mat-flat-button
+            color="warn"
+            *ngIf="!hideControls.delete"
+            [disabled]="this.selection.selected.length === 0"
+            (click)="confirmDelete()">
+      <mat-icon>delete</mat-icon> Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

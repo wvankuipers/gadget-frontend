@@ -1,0 +1,11 @@
+$z-index-map: ();
+$counter: 1;
+
+@each $item in $z-indexed-items {
+ $z-index-map: map-merge($z-index-map, ($item: $counter));
+ $counter: $counter + 1;
+}
+
+@mixin zIndex($key) {
+  z-index: map-get($z-index-map, $key);
+}
