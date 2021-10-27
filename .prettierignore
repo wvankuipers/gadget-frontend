@@ -1,0 +1,4 @@
+# Disabled languages
+*.html
+*.md
+*.scss
