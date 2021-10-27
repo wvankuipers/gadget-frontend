@@ -1,10 +1,12 @@
+@use "sass:math";
+
 /* Fonts */
 $fontSizeBase: 16px;
 
 /* Spacing */
-$spaceBase: 1rem;         /* 16px */
-$spaceS: $spaceBase / 2;  /* 8px  */
-$spaceL: $spaceBase *1.5; /* 24px */
+$spaceBase: 1rem;                  /* 16px */
+$spaceS: math.div($spaceBase, 2);  /* 8px  */
+$spaceL: $spaceBase * 1.5;         /* 24px */
 
 /* Z-index items */
 $z-indexed-items: [
