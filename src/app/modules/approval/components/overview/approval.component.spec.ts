@@ -1,4 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MockModule } from 'ng-mocks';
 import { ApprovalComponent } from './approval.component';
 
 describe('ApprovalComponent', () => {
@@ -9,6 +11,7 @@ describe('ApprovalComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ApprovalComponent],
+        imports: [MockModule(MatCardModule)],
       }).compileComponents();
     })
   );
