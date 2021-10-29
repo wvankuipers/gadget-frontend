@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MockModule } from 'ng-mocks';
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
@@ -9,6 +11,7 @@ describe('DashboardComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [DashboardComponent],
+        imports: [MockModule(MatCardModule)],
       }).compileComponents();
     })
   );

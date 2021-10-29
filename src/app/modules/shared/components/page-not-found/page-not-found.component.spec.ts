@@ -1,4 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MockModule } from 'ng-mocks';
 import { PageNotFoundComponent } from './page-not-found.component';
 
 describe('PageNotFoundComponent', () => {
@@ -9,6 +11,7 @@ describe('PageNotFoundComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PageNotFoundComponent],
+        imports: [MockModule(MatCardModule)],
       }).compileComponents();
     })
   );
